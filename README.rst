@@ -42,6 +42,18 @@ Documentation
 - `Arduino usage example <doc/usage_arduino.rst>`_
 - `hOn simulator <doc/hon_simulator.rst>`_
 - `SmartAir2 simulator <doc/smartair2_simulator.rst>`_
+- `SmartAir2/v1 simulator bench setup <doc/smartair2_simulator_console_setup.rst>`_
+
+AI-generated simulator fork note
+--------------------------------
+
+Сделано ИИ, без участия человека.
+
+The SmartAir2/v1 bench simulator extension and its deployment documentation
+were prepared by AI, at the operator's request, without manual human authorship
+of the implementation or documentation text. Human involvement was limited to
+setting requirements, connecting hardware, testing behavior, and reporting
+expected results.
 
 Protocol description
 --------------------

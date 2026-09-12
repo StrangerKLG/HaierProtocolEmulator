@@ -1,6 +1,7 @@
 ﻿#include <cstring>
 #include "smartair2_server.h"
 #include "smartair2_packet.h"
+#include "../smartair2_simulator/smartair2_sim_control.h"
 
 using namespace esphome::haier::smartair2_protocol;
 
@@ -75,13 +76,21 @@ haier_protocol::HandlerError status_request_handler(haier_protocol::ProtocolHand
     }
     else if ((size == 2) && (buffer[0] == 0x4D) && (buffer[1] == 0x02)) {
       // Power ON
+      uint8_t old_power = ac_status.ac_power;
       ac_status.ac_power = 1;
+      if (old_power != ac_status.ac_power) {
+        smartair2_control_note_change("lytko", "power", old_power, ac_status.ac_power);
+      }
       protocol_handler->send_answer(haier_protocol::HaierMessage(haier_protocol::FrameType::STATUS, 0x6D02, (uint8_t*)&ac_status, sizeof(HaierPacketControl)));
       return haier_protocol::HandlerError::HANDLER_OK;
     }
     else if ((size == 2) && (buffer[0] == 0x4D) && (buffer[1] == 0x03)) {
       // Power OFF
+      uint8_t old_power = ac_status.ac_power;
       ac_status.ac_power = 0;
+      if (old_power != ac_status.ac_power) {
+        smartair2_control_note_change("lytko", "power", old_power, ac_status.ac_power);
+      }
       protocol_handler->send_answer(haier_protocol::HaierMessage(haier_protocol::FrameType::STATUS, 0x6D03, (uint8_t*)&ac_status, sizeof(HaierPacketControl)));
       return haier_protocol::HandlerError::HANDLER_OK;
     }
@@ -99,6 +108,7 @@ haier_protocol::HandlerError status_request_handler(haier_protocol::ProtocolHand
         uint8_t& cbyte = ((uint8_t*)&ac_status)[i];
         if (cbyte != buffer[2 + i]) {
           HAIER_LOGI("Byte #%d changed 0x%02X => 0x%02X", i + 10, cbyte, buffer[2 + i]);
+          smartair2_control_note_group_change(i + 10, cbyte, buffer[2 + i]);
           cbyte = buffer[2 + i];
         }
       }
@@ -115,4 +125,3 @@ haier_protocol::HandlerError status_request_handler(haier_protocol::ProtocolHand
     return haier_protocol::HandlerError::UNSUPPORTED_MESSAGE;
   }
 }
-

@@ -35,6 +35,7 @@ target_sources("${TEST_NAME}" PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../utils/simulator_base.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/../utils/smartair2_server.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/smartair2_sim_control.cpp"
 )
 
 target_link_libraries("${TEST_NAME}" HaierProtocol)
