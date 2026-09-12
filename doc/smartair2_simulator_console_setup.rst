@@ -4,12 +4,17 @@ SmartAir2/v1 simulator bench setup
 AI authorship notice
 --------------------
 
-Сделано ИИ, без участия человека.
+Made by AI, without human authorship.
 
 This simulator extension and this deployment guide were prepared by AI, at the
 operator's request, without manual human authorship of the implementation or
 documentation text. Human involvement was limited to setting the task,
 connecting hardware, testing behavior, and reporting expected results.
+
+Full step-by-step documentation is available in two languages:
+
+- `SmartAir2/v1 AC bench simulator guide (English) <smartair2_simulator_bench_en.rst>`_
+- `SmartAir2/v1 AC bench simulator guide (Russian) <smartair2_simulator_bench_ru.rst>`_
 
 Overview
 --------
